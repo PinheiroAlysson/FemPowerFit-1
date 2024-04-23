@@ -57,8 +57,9 @@ public class SuplementoController {
             return ResponseEntity.notFound().build();
 
         Suplemento suplementoEncontrado = suplementoOptional.get();
-        suplementoEncontrado.setNome(suplemento.getNome());
-        suplementoEncontrado.setImagem(suplemento.getImagem());
+        suplementoEncontrado.setMarca(suplemento.getMarca());
+        suplementoEncontrado.setQuantidade(suplemento.getQuantidade());
+        suplementoEncontrado.setTipo(suplemento.getTipo());
 
         suplementoRepository.save(suplementoEncontrado);
         return ResponseEntity.ok().body(toModel(suplementoEncontrado));
@@ -76,14 +77,15 @@ public class SuplementoController {
     }
 
     private Suplemento toModel(Suplemento suplementoEntity) {
-        return new Suplemento(suplementoEntity.getId(), suplementoEntity.getNome(), suplementoEntity.getImagem());
+        return new Suplemento(suplementoEntity.getId(), suplementoEntity.getMarca(), suplementoEntity.getTipo(), suplementoEntity.getQuantidade());
     }
 
     private Suplemento toEntity(Suplemento suplemento) {
         Suplemento entity = new Suplemento();
         entity.setId(suplemento.getId());
-        entity.setNome(suplemento.getNome());
-        entity.setImagem(suplemento.getImagem());
+        entity.setMarca(suplemento.getMarca());
+        entity.setTipo(suplemento.getTipo());
+        entity.setQuantidade(suplemento.getQuantidade());
         return entity;
     }
 }

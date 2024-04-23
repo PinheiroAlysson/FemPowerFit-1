@@ -1,37 +1,51 @@
 package com.fempowerfit.FPF.Model;
 
+import com.fempowerfit.FPF.Validation.TipoSuplemento;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
 @Entity
-@Table(name = "SUPLEMENTO")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Suplemento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
     private Long id;
 
-    @Column(name = "NOME", nullable = false, length = 100)
-    private String nome;
+    @NotBlank(message = "{suplemento.marca.notblank}")
+    @Size(min = 6, message = "{suplemento.marca.size}")
+    private String marca;
 
-    @Column(name = "IMAGEM", nullable = false, length = 255)
-    private String imagem;
+    private int quantidade;
 
+    @TipoSuplemento(message = "{suplemento.tipo.tiposuplemento}")
+    private String tipo;
+    
     // Construtor com três argumentos
-    public Suplemento(Long id, String nome, String imagem) {
+    public Suplemento(Long id, String marca, String tipo, int quantidade) {
         this.id = id;
-        this.nome = nome;
-        this.imagem = imagem;
+        this.marca = marca;
+        this.quantidade = quantidade;
+        this.tipo = tipo;
     }
 
     // Construtor padrão
-    public Suplemento() {
-    }
+    // public Suplemento() {
+    // }
 
     // Getters e Setters
     public Long getId() {
@@ -42,19 +56,27 @@ public class Suplemento {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
-    public String getImagem() {
-        return imagem;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
+    public String getTipo(){
+        return tipo;
+    }
+
+    public void setTipo (String tipo){
+        this.tipo = tipo;
     }
 }

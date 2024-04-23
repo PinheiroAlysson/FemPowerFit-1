@@ -7,7 +7,7 @@ public class TipoSuplementoValidator implements ConstraintValidator<TipoSuplemen
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return value.equals("WHEYPROTEIN") || value.equals("CREATINA") || value.equals("PRE-TREINO") || value.equals("OUTRO");
+        return value.equalsIgnoreCase("WHEYPROTEIN") || value.equalsIgnoreCase("CREATINA") || value.equalsIgnoreCase("PRE-TREINO") || value.equalsIgnoreCase("OUTRO");
     }
 
 }
