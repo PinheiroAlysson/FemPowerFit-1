@@ -2,12 +2,10 @@ package com.fempowerfit.FPF.Model;
 
 import com.fempowerfit.FPF.Validation.TipoSuplemento;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -42,10 +40,6 @@ public class Suplemento {
         this.quantidade = quantidade;
         this.tipo = tipo;
     }
-
-    // Construtor padrão
-    // public Suplemento() {
-    // }
 
     // Getters e Setters
     public Long getId() {

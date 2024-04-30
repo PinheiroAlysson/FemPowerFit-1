@@ -5,6 +5,10 @@ import com.fempowerfit.FPF.repository.SuplementoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +27,21 @@ public class SuplementoController {
     private SuplementoRepository suplementoRepository;
 
     @GetMapping("/meusSuplementos")
-    public List<Suplemento> listar() {
-        List<Suplemento> suplementos = new ArrayList<>();
-        for (Suplemento entity : suplementoRepository.findAll()) {
-            suplementos.add(toModel(entity));
+    public Page<Suplemento> listar(
+        @RequestParam(required = false) String suplemento,
+        @RequestParam(required = false) String tipo,
+        @PageableDefault(sort = "tipo", direction = Direction.DESC) Pageable pageable
+    ) {
+        if (tipo != null) {
+            return suplementoRepository.findByTipoIgnoreCase(tipo, pageable);
         }
-        return suplementos;
+
+        return suplementoRepository.findAll(pageable);
+        // List<Suplemento> suplementos = new ArrayList<>();
+        // for (Suplemento entity : suplementoRepository.findAll()) {
+        //     suplementos.add(toModel(entity));
+        // }
+        // return suplementos;
     }
 
     @GetMapping("/{id}")
