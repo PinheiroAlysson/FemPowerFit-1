@@ -30,7 +30,7 @@ public class SuplementoController {
     public Page<Suplemento> listar(
         @RequestParam(required = false) String suplemento,
         @RequestParam(required = false) String tipo,
-        @PageableDefault(sort = "tipo", direction = Direction.DESC) Pageable pageable
+        @PageableDefault(sort = "tipo", direction = Direction.ASC) Pageable pageable
     ) {
         if (tipo != null) {
             return suplementoRepository.findByTipoIgnoreCase(tipo, pageable);

@@ -9,6 +9,6 @@ import com.fempowerfit.FPF.Model.Suplemento;
 
 public interface SuplementoRepository extends JpaRepository<Suplemento, Long> {
 
-    @Query("SELECT s FROM Suplementacao s ORDER BY s.suplementacao.tipo")
+    @Query("SELECT s FROM Suplemento s ORDER BY s.tipo")
     Page<Suplemento> findByTipoIgnoreCase(String tipo, Pageable pageable);    
 }
